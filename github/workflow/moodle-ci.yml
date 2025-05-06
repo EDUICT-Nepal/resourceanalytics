@@ -1,0 +1,37 @@
+name: Moodle Plugin CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**' # Replaced "*" with "**" for better compatibility
+
+jobs:
+  moodle-plugin-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: mbstring, intl, zip
+
+      - name: Install dependencies
+        run: |
+          composer install
+
+      - name: Run Moodle Plugin CI
+        run: |
+          vendor/bin/moodle-plugin-ci phplint
+          vendor/bin/moodle-plugin-ci phpcpd
+          vendor/bin/moodle-plugin-ci phpmd
+          vendor/bin/moodle-plugin-ci codechecker
+          vendor/bin/moodle-plugin-ci validate
+          vendor/bin/moodle-plugin-ci phpunit
+          vendor/bin/moodle-plugin-ci behat

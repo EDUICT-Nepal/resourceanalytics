@@ -4,8 +4,8 @@
     <TABLE NAME="local_resourceanalytics" COMMENT="Tracks resource views and downloads">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
-        <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" />
-        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" />
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" INDEX="true" />
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" INDEX="true" />
         <FIELD NAME="action" TYPE="char" LENGTH="20" NOTNULL="true" COMMENT="view or download" />
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" />
       </FIELDS>
