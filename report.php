@@ -40,7 +40,12 @@ echo $OUTPUT->heading(get_string('resourceanalytics', 'local_resourceanalytics')
 
 $modules = get_fast_modinfo($courseid)->get_cms();
 $table = new html_table();
-$table->head = ['Activity name', 'View count', 'Download count'];
+$table->head = [
+    get_string('resourcename', 'local_resourceanalytics'),
+    get_string('viewcount', 'local_resourceanalytics'),
+    get_string('downloadcount', 'local_resourceanalytics'),
+];
+
 
 global $DB;
 
@@ -97,12 +102,12 @@ $firstevent = $DB->get_field_sql("
 
 if (!empty($firstevent)) {
     echo html_writer::div(
-        html_writer::tag('strong', 'Note:') . ' Tracking started on ' . userdate($firstevent),
+       html_writer::tag('strong', get_string('note', 'local_resourceanalytics')) . ' ' . get_string('trackingstarted', 'local_resourceanalytics', userdate($firstevent)),
         'small text-muted mt-3'
     );
 } else {
     echo html_writer::div(
-        html_writer::tag('strong', 'Note:') . ' No tracking data found.',
+       html_writer::tag('strong', get_string('note', 'local_resourceanalytics')) . ' ' . get_string('notrackingdata', 'local_resourceanalytics'),
         'small text-muted mt-3'
     );
 }
